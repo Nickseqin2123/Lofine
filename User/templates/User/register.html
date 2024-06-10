@@ -1,0 +1,30 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href={% static "User/css/style.css" %}>
+    <link rel="stylesheet" href={% static "User/css/register_login.css" %}>
+    <link href="https://necolas.github.io/normalize.css/8.0.1/normalize.css" rel="stylesheet">
+    <title>Register</title>
+</head>
+<body class='gradient'>
+    <div class="parent">
+        <form class="form" action="" method="post">
+            {% csrf_token %}
+            <div class="form-error">{{ form.non_field_errors }}</div>
+
+            <div class="form-error">{{ form.non_field_errors }}</div>
+            {% for f in form %}
+            <p><label for="{{ f.id_for_label }}">{{ f.label }}</label>{{ f }}</p>
+            <div class="form-error">{{ f.errors }}</div>
+            {% endfor %}
+        
+            <p><a href={% url "User:login" %}>Уже зарегестрированы?</a></p>
+            <button class="btn" type="submit">Регистрация</button>
+        </form>
+    </div>
+</body>
+</html>

@@ -1,0 +1,86 @@
+.gradient {
+    font-family: Arial, sans-serif;
+    height: 100vh;
+    width: 100%;
+    background: linear-gradient(149deg, rgba(24,187,156,1) 0%, rgba(106,57,175,1) 42%, rgba(187,24,148,1) 72%, rgba(115,53,134,1) 100%);
+    animation: gradient 10s infinite linear;
+    background-size: 400%;
+}
+
+@keyframes gradient {
+    0% {
+        background-position: 80% 0%;
+    }
+    50% {
+        background-position: 20% 100%;
+    }
+    100% {
+        background-position: 80% 0%;
+    }
+}
+  
+  * {
+    box-sizing: border-box;
+  }
+  
+.parent {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+	  flex-direction: column;
+    
+  }
+  
+.parent .form {
+    opacity: 80%;
+    border-radius: 5px;
+    width: 500px;
+    padding: 15px;
+    background: linear-gradient(149deg, rgb(110, 139, 133) 0%, rgb(151, 138, 169) 42%, rgb(151, 148, 150) 72%, rgb(164, 137, 173) 100%);
+  }
+  
+  .input {
+    display: block;
+    width: 100%;
+    padding: 8px 10px;
+    margin-bottom: 10px;
+    border: 1px solid #7c7b7b;
+    font-family: inherit;
+    font-size: 16px;
+  }
+  
+  .btn {
+    display: block;
+    width: 100%;
+
+    padding: 8px 10px;
+    
+    border: 0;
+    background: linear-gradient(149deg, rgb(149, 237, 155) 0%, rgb(99, 156, 115) 42%, rgb(123, 212, 184) 72%, rgb(74, 146, 114) 100%);
+    cursor: pointer;
+    
+    font-family: inherit;
+    font-size: 16px;
+    color: #ffffff;
+  }
+  
+  .btn:hover {
+    background: linear-gradient(149deg, rgb(127, 155, 133) 0%, rgb(98, 140, 110) 42%, rgb(176, 199, 191) 72%, rgb(68, 103, 87) 100%);
+  }
+
+.form .reg {
+  text-decoration: none;
+}
+
+@media (max-width: 500px) {
+  .parent .form {
+    width: 370px;
+  }
+}
+
+
+@media (max-height: 667px) {
+  .gradient {
+    height: auto;   
+  }
+}

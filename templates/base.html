@@ -1,0 +1,24 @@
+{% load static %}
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static "User/css/style.css" %}">
+    {% block style %}{% endblock style %}
+    <title>Lofine</title>
+</head>
+<body>
+    <div class="sidenav">
+        <a href="{% url 'user:profile' %}"><img src={% static "User/images/free-icon-home-button-6490332.png" %}></a>
+        <a href="{% url 'user:settings' %}"><img src={% static "User/images/free-icon-settings-126472.png" %}></a>
+        <a href="{% url 'friends:friends_user' %}"><img src={% static "friends/images/free-icon-people-6647733.png" %}></a>
+		<a href="{% url 'friends:search_friends' %}"><img src={% static "friends/images/free-icon-search-magnifier-symbol-of-interface-51658.png" %}></a>
+        <a href="{% url 'user:logout' %}"><img src={% static "User/images/free-icon-exit-402718.png" %}></a>
+    </div>
+    {% block content %}
+    {% endblock content %}
+</body>
+</html>

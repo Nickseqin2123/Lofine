@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block style %}
+<link rel="stylesheet" href="{% static "friends/css/search.css" %}">
+{% endblock %}
+
+{% block content %}
+<div id="cover">
+  <h1>Поиск человека по тегу</h1>
+    <form method="post">
+      {% csrf_token %}
+      <div class="tb">
+        <div class="td">
+          <div class="form-error">{{ form.non_field_errors }}</div>
+          
+          {% for f in form %}
+          <p><label for="{{ f.id_for_label }}"></label>{{ f }}</p>
+          <div class="form-error">{{ f.errors }}</div>
+          {% endfor %}
+
+        </div>
+            <div class="td" id="s-cover">
+              <button type="submit">
+                <div id="s-circle"></div>
+                <span></span>
+              </button>
+           </div>
+      </div>
+    </form>
+</div>
+{% endblock %}

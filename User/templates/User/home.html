@@ -1,0 +1,27 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'User/css/main.css' %}">
+    <link href="https://necolas.github.io/normalize.css/8.0.1/normalize.css" rel="stylesheet">
+    <title>Lofine</title>
+</head>
+<body class="gradient">
+    <div class="flowtext">
+        <h1>Lofine</h1>
+    </div>
+
+    <div class="choice">
+        <button class="glow-on-hover" type="button">
+            <a href='{% url "user:regist" %}'>Регистрация</a>
+        </button>
+        
+        <button class="glow-on-hover" type="button">
+            <a href='{% url "user:login" %}'>Вход</a>
+        </button>
+    </div>
+</body>
+</html>

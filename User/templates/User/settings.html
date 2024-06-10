@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block style %}
+<link rel="stylesheet" href={% static "User/css/settings.css" %}>
+{% endblock style %}
+
+{% block content %}
+<div id="w">
+    <h1>{{ title }}</h1>
+    <form id="contactform" name="contact" method="POST" enctype='multipart/form-data'>
+        {% csrf_token %}
+        {{ form.as_p }}
+        <div class="center">
+            <input type="submit" id="submitbtn" name="submitbtn" tabindex="5" value="Сохранить" >
+        </div>
+    </form>
+</div>
+{% endblock content %}  

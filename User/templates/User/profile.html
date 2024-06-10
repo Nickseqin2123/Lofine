@@ -1,0 +1,76 @@
+{% extends "base.html" %}
+{% load static %}
+{% load friendshiptags %}
+
+{% block content %}
+    <div class="main-panel">
+        <div class="image">
+            {% if post.photo %}
+            <img src="{{ post.photo.url }}">
+            {% else %}
+            <img src="{{ default_photo }}">
+            {% endif %}
+        </div>
+        <div class="with-user">
+
+            <div class="name-person">
+                <h2>{{ post.first_name }} {{ post.last_name }}</h2>
+                <hr>
+                <h3>Online</h3>
+                <h4 class="open-modal">Подробнее</h4>
+            </div>
+            
+        </div>
+        {% if post.tag_user != request.user.tag_user %}
+        {% friends_or_not request.user post.id as fr_an_nt %}
+        <div class="choice">
+            {% if fr_an_nt %}
+            <iframe name="iframe1" style="position: absolute; left: -9999px;"></iframe>
+            <form action="{% url "friends:del_frind" %}" method='POST' target='iframe1'>
+                {% csrf_token %}
+                <button class="glow-on-hover" type="sumbit" onclick="setTimeout(function(){ window.location.reload(); }, 50);">
+                    Удалить из друзей
+                </button>
+            </form>
+            {% else %}
+
+            <iframe name="iframe1" style="position: absolute; left: -9999px;"></iframe>
+            <form action="{% url "friends:add_frind" %}" method='POST' target='iframe1'>
+                {% csrf_token %}
+                <button class="glow-on-hover" type="sumbit" onclick="setTimeout(function(){ window.location.reload(); }, 50);"> 
+                    Добавить в друзья
+                </button>
+            </form>
+
+            {% endif %}
+
+            <button class="glow-on-hover" type="button">
+                Пожаловаться
+            </button>
+
+            <button class="glow-on-hover" type="button">
+                + REP
+            </button>
+        </div>
+        {% endif %}
+    </div>
+    <div class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>Информация о пользователе</h2>
+            <p>Имя: {{ post.first_name }}</p>
+            <p>Фамилия: {{ post.last_name }}</p>
+            <p>О себе: {{ post.title|default:"Не указано" }}</p>
+            <p>Страна: {{ post.country|default:"Не указана" }}</p>
+            <p>Тег: {{ post.tag_user }}</p>
+            <p>Город: {{ post.city|default:"Не указан" }}</p>
+            <p>Друзья: {% friends_count request.user %} </p>
+            <p>Дата рождения: {{ post.birthday }}</p>
+            <p>E-mail: {{ post.email }}</p>
+            <p>Номер телефона: {{ post.telephone_number }}</p>
+            <p>Тест: {{ post.telephone_number }}</p>
+        </div>
+    </div>
+    <script src="{% static "User/js/script.js" %}"></script>
+    
+{% endblock content %}

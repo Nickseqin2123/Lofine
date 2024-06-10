@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% load static %}
+{% load friendshiptags %}
+
+{% block style %}
+<link rel="stylesheet" href="{% static "friends/css/friends.css" %}">
+{% endblock %}
+
+{% block content %}
+    <div class="ui">
+		<div class="left-menu">
+			<menu class="list-friends">
+				{% friends request.user %}
+			</menu>
+        </div>
+	</div>	
+{% endblock %}
