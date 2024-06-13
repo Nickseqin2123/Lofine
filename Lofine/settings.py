@@ -146,3 +146,7 @@ LOGOUT_REDIRECT_URL = 'user:login'
 AUTH_USER_MODEL = 'User.User'
 
 DEFAULT_USER_IMAGE = f'{MEDIA_URL}/default.png'
+
+DEBUG_TOOLBAR_CONFIG = {
+    'IS_RUNNING_TESTS': False
+}

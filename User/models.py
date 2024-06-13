@@ -1,6 +1,5 @@
 from django.db import models
 from django.contrib.auth.models import AbstractUser
-from django.urls import reverse
 
 
 class User(AbstractUser):
@@ -10,5 +9,5 @@ class User(AbstractUser):
     country = models.CharField(max_length=60, blank=True, verbose_name='Страна')
     city = models.CharField(max_length=85, blank=True, verbose_name='Город')
     tag_user = models.CharField(max_length=20, verbose_name='Тег', null=True)
-    telephone_number = models.CharField(max_length=20, verbose_name='Номер телефона')
+    telephone_number = models.CharField(max_length=18, verbose_name='Номер телефона')
     
