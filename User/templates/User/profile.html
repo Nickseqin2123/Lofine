@@ -24,20 +24,21 @@
         {% if post.tag_user != request.user.tag_user %}
         {% friends_or_not request.user post.id as fr_an_nt %}
         <div class="choice">
-            {% if fr_an_nt %}
             <iframe name="iframe1" style="position: absolute; left: -9999px;"></iframe>
+            {% if fr_an_nt %}
+
             <form action="{% url "friends:del_frind" %}" method='POST' target='iframe1'>
                 {% csrf_token %}
-                <button class="glow-on-hover" type="sumbit" onclick="setTimeout(function(){ window.location.reload(); }, 50);">
+                <button class="glow-on-hover" type="sumbit" onclick='refreshPage()'>
                     Удалить из друзей
                 </button>
             </form>
-            {% else %}
 
-            <iframe name="iframe1" style="position: absolute; left: -9999px;"></iframe>
+            {% else %}
+            
             <form action="{% url "friends:add_frind" %}" method='POST' target='iframe1'>
                 {% csrf_token %}
-                <button class="glow-on-hover" type="sumbit" onclick="setTimeout(function(){ window.location.reload(); }, 50);"> 
+                <button class="glow-on-hover" type='sumbit' onclick='refreshPage()'> 
                     Добавить в друзья
                 </button>
             </form>
@@ -68,9 +69,10 @@
             <p>Дата рождения: {{ post.birthday }}</p>
             <p>E-mail: {{ post.email }}</p>
             <p>Номер телефона: {{ post.telephone_number }}</p>
-            <p>Тест: {{ post.telephone_number }}</p>
         </div>
     </div>
     <script src="{% static "User/js/script.js" %}"></script>
+    <script src="{% static "User/js/disb.js" %}"></script>
+    <script src="{% static "User/js/reload.js" %}"></script>
     
 {% endblock content %}
