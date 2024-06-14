@@ -1,8 +1,12 @@
 import datetime
+
+from typing import Any
 from django import forms
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth import get_user_model
 from django.contrib.auth.forms import UserCreationForm
+from django.forms.forms import ValidationError
+from django.contrib.auth import authenticate
 
 
 class UserAuthoriateForm(AuthenticationForm):
@@ -10,18 +14,36 @@ class UserAuthoriateForm(AuthenticationForm):
         super(UserAuthoriateForm, self).__init__(*args, **kwargs)
         self.fields['username'].widget.attrs.update({'class': 'input'})
         self.fields['password'].widget.attrs.update({'class': 'input'})
-        
+    
     username = forms.CharField(label='Логин',
                                widget=forms.TextInput()
                                )
+    
     password = forms.CharField(label='Пароль',
                                widget=forms.PasswordInput())
-
         
     class Meta:
         model = get_user_model()
 
 
+    def clean_username(self) -> dict[str, Any]:
+        username = self.cleaned_data['username']
+        self.username = username
+        
+        if get_user_model().objects.filter(username=username).exists():
+            return username
+        
+        raise ValidationError('Пользователя с таким username не существует')
+
+    def clean_password(self) -> dict[str, Any]:
+        password = self.cleaned_data['password']
+        
+        if authenticate(username=self.username, password=password):
+            return password
+        
+        raise ValidationError('Проверьте имя пользователя или пароль. Оба поля могут быть чувствительны к регистру')
+    
+    
 class RegistrationUserForm(UserCreationForm):
     def __init__(self, *args, **kwargs): # Применяем к полям формы свои стили
         super(RegistrationUserForm, self).__init__(*args, **kwargs)
@@ -69,7 +91,7 @@ class SettingFormUser(forms.ModelForm):
     email = forms.EmailField(disabled=True, label='E-mail')
     first_name = forms.CharField(label='Имя', required=False, max_length=30)
     last_name = forms.CharField(label='Фамилия', required=False, max_length=20)
-    tag_user = forms.CharField(max_length=20, label='Тег', required=False, max_length=20)
+    tag_user = forms.CharField(max_length=20, label='Тег', required=False)
     title = forms.CharField(max_length=50, label='Описание профиля', required=False)
     country = forms.CharField(max_length=60, label='Страна', required=False)
     city = forms.CharField(max_length=85, label='Город', required=False)
