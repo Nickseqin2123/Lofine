@@ -110,4 +110,5 @@ class SettingFormUser(forms.ModelForm):
         user_1 = get_user_model().objects.filter(tag_user=user_tag)
         if user_1.exists() and self.cleaned_data['username'] != user_1[0].username:
             raise forms.ValidationError('Пользователь с таким тегом уже существует')
+        
         return user_tag
